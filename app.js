@@ -14,7 +14,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use((req, res, next) => {
+    res.status(404).json("Page not found on the server")
+})
 
 module.exports = app;

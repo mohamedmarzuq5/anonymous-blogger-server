@@ -7,12 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('anonymous-blogger-server:server');
 var http = require('http');
+var mongoose = require('mongoose')
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 /**
@@ -88,3 +89,12 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+/**
+ * Connection to MongoDB Atlas server.
+ */
+mongoose.set("strictQuery", true);
+mongoose
+  .connect('mongodb+srv://netninja:test1234@anonymous-blogger.sfolw8f.mongodb.net/?retryWrites=true&w=majority')
+  .then(() => { console.log("Connected!"); })
+  .catch((e) => console.log("Error: " + e));
