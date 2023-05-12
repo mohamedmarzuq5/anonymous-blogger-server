@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,6 +14,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const corsOptions = {
+    origin: ['https://anonymous-blogger.vercel.app', 'https://anonymous-blogger-git-test-mohamedmarzuq.vercel.app'],
+    // optionsSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions))
 
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
