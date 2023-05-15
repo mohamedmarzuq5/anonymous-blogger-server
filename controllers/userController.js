@@ -35,4 +35,21 @@ module.exports = {
             // return error.message
         }
     },
+    getThreeBlogs: async () => {
+        // console.log(await Blog.count());
+        try {
+            const blogs = await Blog.find({
+                approved: false,
+            }).limit(3).sort({
+                viewers: -1,
+            });
+
+            console.log(blogs);
+            return blogs;
+        } catch (error) {
+            console.error("Error: " + error.message);
+            throw new Error(error.message);
+            // return error.message
+        }
+    },
 };
